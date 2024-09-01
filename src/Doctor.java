@@ -1,4 +1,5 @@
 public class Doctor {
+
     public int dId ;
     public String name;
     public String birthday;
