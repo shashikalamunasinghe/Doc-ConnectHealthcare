@@ -1,7 +1,11 @@
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    public static ArrayList<Doctor> allDoctors = new ArrayList<>();
 
     public static void hospitalAdministratorMenu() {
         boolean runAdmin = true;
@@ -11,7 +15,20 @@ public class Main {
             int userObjective = scanner.nextInt();
 
             if (userObjective == 1) {
-                System.out.println("added a doctor");
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Enter the name:");
+                String name = sc.nextLine();
+                System.out.println("Enter the birthday:");
+                String birthday = sc.nextLine();
+                System.out.println("Enter the specialization:");
+                String specialization = sc.nextLine();
+                System.out.println("Enter the contact number:");
+                String contact = sc.nextLine();
+
+                Random random = new Random();
+                Doctor newDoctor = new Doctor(random.nextInt(), name,birthday,specialization,contact);
+                allDoctors.add(newDoctor);
+
             } else if (userObjective == 2) {
                 System.out.println("added doctor availability");
             } else if (userObjective == 3) {
@@ -31,7 +48,9 @@ public class Main {
             int userObjective = scanner.nextInt();
 
             if (userObjective == 1) {
-                System.out.println("all the doctors");
+                for(Doctor doctor : allDoctors){
+                    System.out.println(doctor.name +": " + doctor.specialization);
+                }
             } else if (userObjective == 2) {
                 System.out.println("booked an appointment");
             } else if (userObjective == 3) {
@@ -69,29 +88,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //run();
-
+        run();
         // Sample Doctor objects
-        Doctor doctor1 = new Doctor(101, "John Smith", "1970-01-01", "Neuro-physician", "123-456-7890");
-        Doctor doctor2 = new Doctor(102, "Jane Doe", "1980-02-02", "Cardiologist", "987-654-3210");
+        //Doctor doctor1 = new Doctor(101, "John Smith", "1970-01-01", "Neuro-physician", "123-456-7890");
+        //Doctor doctor2 = new Doctor(102, "Jane Doe", "1980-02-02", "Cardiologist", "987-654-3210");
 
         // Test doctor methods
-        System.out.println("Doctor 1:");
-        System.out.println("Is Physician?: " + doctor1.isPhysician());
+        //System.out.println("Doctor 1:");
+        //System.out.println("Is Physician?: " + doctor1.isPhysician());
 
-        System.out.println("\nDoctor 2:");
-        System.out.println("Is Physician: " + doctor2.isPhysician());
+        //System.out.println("\nDoctor 2:");
+        //System.out.println("Is Physician: " + doctor2.isPhysician());
 
         // Sample Patient objects
-        Patient patient1 = new Patient("T-1234", "Alice Johnson", "2000-03-03", "555-123-4567");
-        Patient patient2 = new Patient("D-5678", "Bob Williams", "1990-04-04", "888-789-0123");
+        //Patient patient1 = new Patient("T-1234", "Alice Johnson", "2000-03-03", "555-123-4567");
+        //Patient patient2 = new Patient("D-5678", "Bob Williams", "1990-04-04", "888-789-0123");
 
         // Test patient methods
-        System.out.println("\nPatient 1:");
-        System.out.println("Patient Type: " + patient1.getPatientType());
+        //System.out.println("\nPatient 1:");
+        //System.out.println("Patient Type: " + patient1.getPatientType());
 
-        System.out.println("\nPatient 2:");
-        System.out.println("Patient Type: " + patient2.getPatientType());
+        //System.out.println("\nPatient 2:");
+        //System.out.println("Patient Type: " + patient2.getPatientType());
 
     }
 }
