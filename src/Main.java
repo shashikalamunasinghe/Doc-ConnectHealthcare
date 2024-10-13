@@ -1,14 +1,9 @@
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
-    public static ArrayList<Doctor> allDoctors = new ArrayList<>();
-
     public static void hospitalAdministratorMenu() {
+
         boolean runAdmin = true;
         while (runAdmin) {
             try (Scanner scanner = new Scanner(System.in)) {
@@ -16,50 +11,15 @@ public class Main {
                 int userObjective = scanner.nextInt();
 
                 if (userObjective == 1) {
-                    try (Scanner sc = new Scanner(System.in)) {
-                        System.out.println("Enter the name:");
-                        String name = sc.nextLine();
-                        System.out.println("Enter the birthday:");
-                        String birthday = sc.nextLine();
-                        System.out.println("Enter the specialization:");
-                        String specialization = sc.nextLine();
-                        System.out.println("Enter the contact number:");
-                        String contact = sc.nextLine();
-
-                        Random random = new Random();
-                        Doctor newDoctor = new Doctor(random.nextInt(), name,birthday,specialization,contact);
-                        allDoctors.add(newDoctor);
-                    }
+                    //add the doctor in to the ArrayList
+                    Controller.addDoctors();
+                    System.out.println("Doctor is added successfully");
 
                 } else if (userObjective == 2) {
                     //add doctor availability
-                    System.out.println("Enter the doctor id you want to add availability");
-                    int selectedDocId = scanner.nextInt();
-                    //fetch the doctor from the allDoctors ArrayList
-                    Doctor selectedDoctor = null;
+                    Controller.addAvailabilityForDoctors();
+                    System.out.println("Doctor availability is added successfully");
 
-                    for (Doctor doc : allDoctors) {
-                        if(doc.doctorId == selectedDocId) {
-                            selectedDoctor = doc;
-                        }
-                    }
-                    //need to check wether the doctor is existing or not
-                    if(selectedDoctor == null) {
-                        System.out.println("no doctor found");
-                        return;
-                    }
-                    //if the doctor is existing,take the date
-                    System.out.println("Enter the year:");
-                    int year = scanner.nextInt();
-                    System.out.println("Enter the month:");
-                    int month = scanner.nextInt();
-                    System.out.println("Enter the day:");
-                    int day = scanner.nextInt();
-                    Date bookDate = new Date(year, month, day);
-                    
-                    //add the availability for the doctor
-                    selectedDoctor.addAvailability(bookDate);
-                   
                 } else if (userObjective == 3) {
                     runAdmin = false;
                 } else {
@@ -70,6 +30,7 @@ public class Main {
     }
 
     public static void patientMenu() {
+
         boolean runPatient = true;
         while (runPatient) {
             try (Scanner scanner = new Scanner(System.in)) {
@@ -77,15 +38,16 @@ public class Main {
                 int userObjective = scanner.nextInt();
 
                 if (userObjective == 1) {
-                    for (Doctor doctor : allDoctors) {
-                        System.out.println(doctor.name + ": " + doctor.specialization);
-                    }
+                    //view all doctors
+                    Controller.viewDoctors();
                 } else if (userObjective == 2) {
                     System.out.println("Booked an appointment");
                 } else if (userObjective == 3) {
                     System.out.println("Selected doctor's bookings");
                 } else if (userObjective == 4) {
-                    System.out.println("Register patient");
+                    //register patient
+                    Controller.registerPatient();
+                    System.out.println("patient is registered successfully");
                 } else if (userObjective == 5) {
                     runPatient = false;
                 } else {
