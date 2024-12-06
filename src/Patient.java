@@ -17,4 +17,5 @@ public class Patient {
         char patientType = this.patientId.charAt(0);
         return patientType;
     }
+
 }
