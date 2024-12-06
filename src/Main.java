@@ -34,19 +34,20 @@ public class Main {
         boolean runPatient = true;
         while (runPatient) {
             try (Scanner scanner = new Scanner(System.in)) {
-                System.out.println("Press 1 to view doctors, press 2 to book an appointment, press 3 to view a selected doctor's bookings, press 4 to register patient, and press 5 to exit");
+                System.out.println("Press 1 to view doctors, press 2 to book an appointment, press 3 to view a selected doctor's bookings, press 4 to add a patient, and press 5 to exit");
                 int userObjective = scanner.nextInt();
 
                 if (userObjective == 1) {
                     //view all doctors
                     Controller.viewDoctors();
                 } else if (userObjective == 2) {
+                    Controller.bookAppointment();
                     System.out.println("Booked an appointment");
                 } else if (userObjective == 3) {
                     System.out.println("Selected doctor's bookings");
                 } else if (userObjective == 4) {
                     //register patient
-                    Controller.registerPatient();
+                    Controller.addPatient();
                     System.out.println("patient is registered successfully");
                 } else if (userObjective == 5) {
                     runPatient = false;
@@ -79,6 +80,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
+        Doctor sampleDoc = new Doctor(223,"Saman Kumara","22.05.1987","Gynocologist","077-333-9900");
+        Patient samplePatient = new Patient("T-12", "Alice Johnson","2012-10-15" , "555-123-4567");
+        Controller.allDoctors.add(sampleDoc);
+        Controller.allPatients.add(samplePatient);
         run();
         // Sample Doctor objects
         // Doctor doctor1 = new Doctor(101, "John Smith", "1970-01-01", "Neuro-physician", "123-456-7890");

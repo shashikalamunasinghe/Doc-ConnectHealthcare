@@ -64,7 +64,7 @@ public class Controller {
         }
     }
 
-    public static void registerPatient() {
+    public static void addPatient() {
 
         System.out.println("Enter the name:");
         String name = scanner.nextLine();
@@ -81,4 +81,61 @@ public class Controller {
         System.out.println(allPatients.toString());
     }
 
+    public static void bookAppointment() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Doctor's Id you want to make an appointment: ");
+        int docId = scanner.nextInt();
+        System.out.println("Enter you patient's Id: ");
+        String patientId = scanner.next();
+
+        System.out.println("Enter the Day you want to add Availability: ");
+        String day = scanner.next();
+        System.out.println("Enter the Month you want to add Availability: ");
+        String month = scanner.next();
+        System.out.println("Enter the Year you want to add Availability: ");
+        String year = scanner.next();
+
+        //get the patient and docter
+        Patient selectedPatient = getPatientById(patientId);
+        Doctor selectedDoc = getDoctorById(docId);
+
+        if(selectedDoc == null || selectedPatient == null ){
+            System.out.println("Invalid doctor or patient id");
+            return;
+        }
+
+        //get appointment date
+        Date appointmenDate = new Date(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
+
+        //check the availability and slots
+        //calculate appointment Time
+        //make the appointment
+        Appointment appointment = new Appointment(selectedDoc, selectedPatient,"no notes", appointmenDate, "");
+        //add it to allAppointments 
+        selectedDoc.setAppointment(appointment, appointmenDate);
+        System.out.println(selectedDoc.allAppointments.toString());
+    }
+    
+    public static Patient getPatientById(String id){
+        for(Patient patient : allPatients){
+            if(patient.patientId.equals(id)){
+                    return patient;
+            }
+        }
+        System.out.println("No Patient Found");
+        return null;
+    }
+
+    public static Doctor getDoctorById(int id){
+        for(Doctor doctor : allDoctors){
+            if(doctor.doctorId == id){
+                return doctor;
+            }
+        }
+        System.out.println("No doctor Found");
+        return null;
+    }
+        
 }
+
+
