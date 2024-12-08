@@ -1,15 +1,26 @@
-public class Patient {
+public class Patient extends Person {
 
-    public String patientId ;
-    public String name;
-    public String birthday;
-    public String contactNo;
+    private String patientId ;
 
-    public Patient(String id,String name,String birthday,String contact){
-        this.name = name;
+    public Patient(String id,String name,String contact,String birthday){
+        super(name,contact,birthday);
         this.patientId = id;
-        this.birthday = birthday;
-        this.contactNo = contact;
+    }
+
+    public String getPatientId() {
+        return this.patientId;
+    }
+
+    public void greeting(){
+        getName();
+        System.out.println("Hello +" + this.getName());
+    }
+
+    @Override
+    public String getName(){
+        System.out.println("Returning Name");
+        System.out.println(this.getName());
+        return this.getName();
     }
 
     public char getPatientType(){
